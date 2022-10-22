@@ -1,6 +1,6 @@
 import React from "react";
 
-const Task = ({ task, price }) => {
+const Task = ({ task, price,verify }) => {
   return (
     <>
       <div className="flex justify-center flex-col border mt-1 p-4">
@@ -8,13 +8,22 @@ const Task = ({ task, price }) => {
           <p className=" text-green-700 ">{task}</p>
           <small className="font-bold text-danger-500">{price.toFixed(2)} Ether</small>
         </div>
+        <div className="flex ">
         <a
           href="#"
-          className="bg-gray-900 w-1/6 text-white mt-1  rounded-md text-sm font-medium"
+          className={`  ${verify ? "bg-green-600" : "bg-gray-900" } mr-4 w-1/6 text-white mt-1  rounded-md text-sm font-medium`}
           aria-current="page"
         >
-          Do It
+          {verify ? "Accept":"Do It"}
         </a>
+        {verify ?<a
+          href="#"
+          className={`  bg-red-500  w-1/6 text-white mt-1  rounded-md text-sm font-medium`}
+          aria-current="page"
+        >
+          Decline
+        </a>:null}
+          </div>
       </div>
     </>
   );
