@@ -15,7 +15,7 @@ const Dashboard = () => {
             })}
         </div>
         <div className="w-1/2 border border-green-500 rounded-sm p-3 flex-col text-center">
-             Tasks Open By User 👍
+            Tasks Open For Worker 👍
             {tasks.map((item,i)=>{
                 return(<Task task={item} key={i} price={(i+1)*0.05} verify={false} />);
             })}

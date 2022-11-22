@@ -44,10 +44,10 @@ const Navbar = () => {
               Home
             </button>
             <button
-              href="#"
+              href="create-task"
               className="text-gray-500 hover:bg-gray-700 hover:text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
             >
-              Tasks
+              Create Task
             </button>
 
             <button
