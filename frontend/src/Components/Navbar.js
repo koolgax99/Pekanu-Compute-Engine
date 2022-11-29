@@ -1,81 +1,69 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../logo.png";
+import { NavLink } from "react-router-dom";
+import { Button, Spinner, Text } from "@chakra-ui/react";
 import { getWeb3 } from "../utils/walletconnection";
-
 const Navbar = () => {
-  const [currentAccount, setCurrentAccount] = useState(null);
-  const connectWallet = async () => {
+  const [currentAccount, setCurrentAccount] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  let connectingWallet = async () => {
     try {
+      setIsActive(true);
       let web3 = await getWeb3();
-      console.log(web3);
-      let accounts = await web3.eth.getAccounts();
 
+      let accounts = await web3.eth.getAccounts();
+      console.log(accounts);
       setCurrentAccount(accounts[0]);
+      setIsActive(false);
     } catch (error) {
       console.log(error);
+      setIsActive(false);
     }
   };
+
   useEffect(() => {
-    connectWallet();
-
-    return () => {};
-  }, [currentAccount]);
-
+    connectingWallet();
+  }, []);
   return (
     <>
-      <div className="px-10">
-        <div className="container p-5 flex justify-between">
-          <div className="flex w-1/2  items-center">
-            <div className="logo mx-2 w-15 h-15 overflow-hidden justify-center items-center flex-col ">
-              <img
-                src={logo}
-                alt="logo"
-                className="text-center"
-                width={50}
-                height={50}
-              />
-              <h5 className="text-center font-bold">PEKANU</h5>
-            </div>
-            <button
-              href="#"
-              className="bg-gray-900 text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
-              aria-current="page"
-            >
-              Home
-            </button>
-            <button
-              href="create-task"
-              className="text-gray-500 hover:bg-gray-700 hover:text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Create Task
-            </button>
+      <nav className="navbar navbar-expand-lg">
+        <NavLink className="navbar-brand" to="/">
+          <img src={logo} width="30%" alt="" />
+        </NavLink>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse " id="navbarNavAltMarkup">
+          <div className="navbar-nav">
+            <NavLink className="navbar-brand" to="/">
+              <Text size="sm" color="blue.700">
+                Home <span className="sr-only">(current)</span>
+              </Text>
+            </NavLink>
 
-            <button
-              href="#"
-              className="text-gray-500 hover:bg-gray-700 hover:text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
+            <NavLink className="navbar-brand" to="/register-task">
+              <Text size="sm" color="blue.700">
+                Register Task
+              </Text>
+            </NavLink>
+            <Button
+              bgColor="blackAlpha.100"
+              onClick={connectingWallet}
+              color="teal.500"
             >
-              Projects
-            </button>
-
-            <button
-              href="#"
-              className="text-gray-500 hover:bg-gray-700 hover:text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Contact
-            </button>
+              {isActive ? currentAccount : <Spinner />}
+            </Button>
           </div>
-          <div className="">
-            <button
-              href="#"
-              className="bg-gray-900 text-white mx-3 px-3 py-2 rounded-md text-sm font-medium mt-3"
-              aria-current="page"
-              onClick={connectWallet}
-            >
-              {currentAccount ? currentAccount : "Connect Wallet 🐺"}
-            </button>
-          </div>
-        </div>{" "}
-      </div>{" "}
+        </div>
+      </nav>
     </>
   );
 };
