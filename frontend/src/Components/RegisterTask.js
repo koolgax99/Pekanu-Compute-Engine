@@ -11,6 +11,7 @@ import {
   PinInput,
   PinInputField,
   HStack,
+  Alert,
 } from "@chakra-ui/react";
 const RegisterTask = () => {
   return (
@@ -29,10 +30,19 @@ const RegisterTask = () => {
                   size="md"
                   className=""
                 />
+                <Alert className="mt-3" bgColor="red.100">
+                  How to write 2d matrix don't give commas between numbers here
+                  it is an example [ [ 1 1 1 1 ][ 2 2 2 2 ] [ 3 3 3 3 ] [ 4 4 4
+                  4 ] ]
+                </Alert>
+
                 <Textarea
                   placeholder="Enter Matrix for Computation"
                   className="mt-3 border-1 "
                 />
+                <Alert className="mt-3" bgColor="red.100">
+                  Price should be in Wei
+                </Alert>
                 <HStack className="mt-2">
                   <PinInput type="alphanumeric">
                     <PinInputField />

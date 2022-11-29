@@ -1,10 +1,11 @@
 import React from "react";
 import logo from "../logo.png";
 import { NavLink } from "react-router-dom";
+import { Text } from "@chakra-ui/react";
 const Navbar = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg">
         <NavLink className="navbar-brand" to="/">
           <img src={logo} width="30%" alt="" />
         </NavLink>
@@ -22,11 +23,13 @@ const Navbar = () => {
         <div className="collapse navbar-collapse " id="navbarNavAltMarkup">
           <div className="navbar-nav">
             <NavLink className="navbar-brand" to="/">
-              Home <span className="sr-only">(current)</span>
+              <Text size="sm" color="blue.700">
+                Home <span className="sr-only">(current)</span>
+              </Text>
             </NavLink>
 
             <NavLink className="navbar-brand" to="/register-task">
-              Register Task
+              <Text size="sm" color="blue.700">Register Task</Text>
             </NavLink>
           </div>
         </div>
