@@ -64,7 +64,7 @@ contract Pekanu {
     {
         require(_id <= taskId, "Task does not exist");
         uint256 amount = tasks[_id].price * 2;
-        require(msg.value >= 2 * amount, "Amount is not be less");
+        require(msg.value >= amount, "Amount is not be less");
 
         return true;
     }

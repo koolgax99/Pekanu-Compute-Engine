@@ -1,81 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import logo from "../logo.png";
-import { getWeb3 } from "../utils/walletconnection";
-
+import { NavLink } from "react-router-dom";
 const Navbar = () => {
-  const [currentAccount, setCurrentAccount] = useState(null);
-  const connectWallet = async () => {
-    try {
-      let web3 = await getWeb3();
-      console.log(web3);
-      let accounts = await web3.eth.getAccounts();
-
-      setCurrentAccount(accounts[0]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    connectWallet();
-
-    return () => {};
-  }, [currentAccount]);
-
   return (
     <>
-      <div className="px-10">
-        <div className="container p-5 flex justify-between">
-          <div className="flex w-1/2  items-center">
-            <div className="logo mx-2 w-15 h-15 overflow-hidden justify-center items-center flex-col ">
-              <img
-                src={logo}
-                alt="logo"
-                className="text-center"
-                width={50}
-                height={50}
-              />
-              <h5 className="text-center font-bold">PEKANU</h5>
-            </div>
-            <button
-              href="#"
-              className="bg-gray-900 text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
-              aria-current="page"
-            >
-              Home
-            </button>
-            <button
-              href="create-task"
-              className="text-gray-500 hover:bg-gray-700 hover:text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Create Task
-            </button>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <NavLink className="navbar-brand" to="/">
+          <img src={logo} width="30%" alt="" />
+        </NavLink>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse " id="navbarNavAltMarkup">
+          <div className="navbar-nav">
+            <NavLink className="navbar-brand" to="/">
+              Home <span className="sr-only">(current)</span>
+            </NavLink>
 
-            <button
-              href="#"
-              className="text-gray-500 hover:bg-gray-700 hover:text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Projects
-            </button>
-
-            <button
-              href="#"
-              className="text-gray-500 hover:bg-gray-700 hover:text-white mx-3 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Contact
-            </button>
+            <NavLink className="navbar-brand" to="/register-task">
+              Register Task
+            </NavLink>
           </div>
-          <div className="">
-            <button
-              href="#"
-              className="bg-gray-900 text-white mx-3 px-3 py-2 rounded-md text-sm font-medium mt-3"
-              aria-current="page"
-              onClick={connectWallet}
-            >
-              {currentAccount ? currentAccount : "Connect Wallet 🐺"}
-            </button>
-          </div>
-        </div>{" "}
-      </div>{" "}
+        </div>
+      </nav>
     </>
   );
 };

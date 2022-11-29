@@ -1,26 +1,21 @@
-import React from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from 'react-router-dom';
-import Dashboard from './Components/Dashboard'
-import CreateTask from './Components/CreateTask'
-import Navbar from './Components/Navbar'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import RegisterTask from "./Components/RegisterTask";
+import Navbar from "./Components/Navbar";
 
 // React Router App
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
+      <div className="container">
+        <Navbar />
+      </div>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/create-task" element={<CreateTask />} />
+        <Route path="/" element={<RegisterTask />} />
       </Routes>
     </Router>
-  )
-  }
+  );
+};
 
-export default App
+export default App;
