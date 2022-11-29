@@ -17,7 +17,7 @@ const RegisterTask = () => {
   return (
     <>
       <div className="container">
-        <div className="row mt-2">
+        <div className="row">
           <div className="col-md-8 col-12 col-xs-12 col-lg-8 col-xl-8 mx-auto p-4 d-flex flex-column justify-content-center align-items-center">
             <Card className="border border-3 shadow-lg">
               <CardHeader>
@@ -30,7 +30,7 @@ const RegisterTask = () => {
                   size="md"
                   className=""
                 />
-                <Alert className="mt-3" bgColor="red.100">
+                <Alert className="mt-3" bgColor="green.100">
                   How to write 2d matrix don't give commas between numbers here
                   it is an example [ [ 1 1 1 1 ][ 2 2 2 2 ] [ 3 3 3 3 ] [ 4 4 4
                   4 ] ]
@@ -40,7 +40,7 @@ const RegisterTask = () => {
                   placeholder="Enter Matrix for Computation"
                   className="mt-3 border-1 "
                 />
-                <Alert className="mt-3" bgColor="red.100">
+                <Alert className="mt-3" bgColor="green.100">
                   Price should be in Wei
                 </Alert>
                 <HStack className="mt-2">

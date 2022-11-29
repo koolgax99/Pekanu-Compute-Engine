@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../logo.png";
 import { NavLink } from "react-router-dom";
-import { Text } from "@chakra-ui/react";
+import { Button, Spinner, Text } from "@chakra-ui/react";
+import { getWeb3 } from "../utils/walletconnection";
 const Navbar = () => {
+  const [currentAccount, setCurrentAccount] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  let connectingWallet = async () => {
+    try {
+      setIsActive(true);
+      let web3 = await getWeb3();
+
+      let accounts = await web3.eth.getAccounts();
+      console.log(accounts);
+      setCurrentAccount(accounts[0]);
+      setIsActive(false);
+    } catch (error) {
+      console.log(error);
+      setIsActive(false);
+    }
+  };
+
+  useEffect(() => {
+    connectingWallet();
+  }, []);
   return (
     <>
       <nav className="navbar navbar-expand-lg">
@@ -29,8 +50,17 @@ const Navbar = () => {
             </NavLink>
 
             <NavLink className="navbar-brand" to="/register-task">
-              <Text size="sm" color="blue.700">Register Task</Text>
+              <Text size="sm" color="blue.700">
+                Register Task
+              </Text>
             </NavLink>
+            <Button
+              bgColor="blackAlpha.100"
+              onClick={connectingWallet}
+              color="teal.500"
+            >
+              {isActive ? currentAccount : <Spinner />}
+            </Button>
           </div>
         </div>
       </nav>
