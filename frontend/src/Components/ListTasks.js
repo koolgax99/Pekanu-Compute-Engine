@@ -8,7 +8,7 @@ const ListTasks = () => {
     try {
       let contract = await getContract();
       let web3 = await getWeb3();
-      let task = await contract.methods.tasks(1).call();
+      // let task = await contract.methods.tasks(2).call();
       console.log(task);
     } catch (error) {
       console.log(error);
