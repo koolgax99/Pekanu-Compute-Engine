@@ -6,19 +6,25 @@ import { getWeb3 } from "../utils/walletconnection";
 const Navbar = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [isActive, setIsActive] = useState(false);
+  const [contractBalanace, setContractBalance] = useState(0);
+  const [currentAccountBalance, setCurrentAccountBalance] = useState(0);
   let connectingWallet = async () => {
+    setIsActive(true);
     try {
-      setIsActive(true);
       let web3 = await getWeb3();
-
       let accounts = await web3.eth.getAccounts();
       console.log(accounts);
+      let crrBal = await web3.eth.getBalance(accounts[0]);
+      let contractBal = await web3.eth.getBalance(
+        "0xB107C6707D5bCAB72A7Fb3352b3008A8a601A5Aa"
+      );
+      setCurrentAccountBalance(crrBal);
+      setContractBalance(contractBal);
       setCurrentAccount(accounts[0]);
-      setIsActive(false);
     } catch (error) {
       console.log(error);
-      setIsActive(false);
     }
+    setIsActive(false);
   };
 
   useEffect(() => {
@@ -27,7 +33,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg">
-        <NavLink className="navbar-brand" to="/">
+        <NavLink className="navbar-brand mx-md-4" to="/">
           <img src={logo} width="30%" alt="" />
         </NavLink>
         <button
@@ -58,8 +64,23 @@ const Navbar = () => {
               bgColor="blackAlpha.100"
               onClick={connectingWallet}
               color="teal.500"
+              className="mx-1"
             >
-              {isActive ? currentAccount : <Spinner />}
+              {isActive ? (
+                <Spinner />
+              ) : (
+                currentAccount.slice(0, 10) + "..." + currentAccount.slice(30)
+              )}
+            </Button>
+            <Button bgColor="green.100" color="white.500" className="mx-1">
+              {isActive ? (
+                <Spinner />
+              ) : (
+                "Account Balance :" + currentAccountBalance
+              )}
+            </Button>
+            <Button bgColor="blue.100" color="blue.800" className="mx-1">
+              {isActive ? <Spinner /> : "Contract Balance :" + contractBalanace}
             </Button>
           </div>
         </div>
